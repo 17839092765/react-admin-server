@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon app"
+    
+  },
   "dependencies": {
     "blueimp-md5": "^2.18.0",
     "cors": "^2.8.5",

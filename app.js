@@ -289,8 +289,29 @@ app.post("/addshop", async (req, res) => {
     });
   }
 });
+//--------修改产品--------------------------------------
+app.post("/editshop", async (req, res) => {
+  console.log(req.body);
+  let { _id } = req.body;
+  const result = await ProductModel.findOneAndUpdate({ _id }, req.body, {
+    new: true,
+  });
+  console.log(result);
+  if (result) {
+    res.json({
+      status: 0,
+      msg: "修改成功",
+    });
+  } else {
+    res.json({
+      status: 1,
+      msg: "修改失败",
+    });
+  }
+});
 // console.log(pageFilter);
 //--------查看产品--------------------------------------
+
 app.post("/lookshopcase", async (req, res) => {
   const { pageNum, pageSize } = req.body;
   console.log(req.body);
@@ -322,7 +343,30 @@ app.post("/lookshopcase", async (req, res) => {
   //     });
   //   }
 });
+//--------修改产品状态--------------------------------------
 
+app.post("/changestatus", async (req, res) => {
+  const { _id, status } = req.body;
+  console.log(_id, status);
+  // const result = await ProductModel.find();
+  const result = await ProductModel.findOneAndUpdate(
+    { _id },
+    { status: status },
+    { new: true }
+  );
+  console.log(result);
+  if (result) {
+    res.json({
+      status: 0,
+      msg: "状态更改成功",
+    });
+  } else {
+    res.json({
+      status: 1,
+      msg: "状态更改失败",
+    });
+  }
+});
 //-------------------------添加角色----------------------------------------
 app.post("/addroles", async (req, res) => {
   console.log(req.body);
@@ -418,6 +462,6 @@ app.post("/lookuserRole", async (req, res) => {
 });
 //-----------------------------------------------------------------
 
-app.listen(5001, () => {
-  console.log("5001端口监听中");
+app.listen(5002, () => {
+  console.log("5002端口监听中");
 });
