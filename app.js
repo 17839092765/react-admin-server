@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
   // destination: 'upload', //string时,服务启动将会自动创建文件夹
   destination: function (req, file, cb) {
     //函数需手动创建文件夹
-    console.log("destination()", file);
+    // console.log("destination()", file);
     if (!fs.existsSync(dirPath)) {
       fs.mkdir(dirPath, function (err) {
         if (err) {
@@ -46,9 +46,9 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + "-" + Date.now() + ext);
   },
 });
-console.log(storage);
+// console.log(storage);
 const upload = multer({ storage });
-console.log(upload);
+// console.log(upload);
 const uploadSingle = upload.single("image");
 
 // =============upload======================
@@ -95,7 +95,7 @@ app.post("/manage/img/delete", (req, res) => {
 
 //--------------------`注册```````````````````````````---
 app.post("/res", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { username, password } = req.body;
 
   // console.log(req.body);
